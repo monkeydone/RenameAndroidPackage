@@ -142,7 +142,7 @@ if __name__=="__main__":
     p.old_package_name=options.old_package_name
     p.new_package_name=options.new_package_name
     #p.build_path="/tmp/b"
-    #p.old_package_name="com.mx.browser"
-    #p.own_package_name="com.mx.browser.test"
+    #p.old_package_name="com.mx"
+    #p.own_package_name="com.mx.test"
     r=RenameAndroidPackage(p)
     r.modify()
