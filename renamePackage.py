@@ -9,7 +9,7 @@ import re
 import sys
 
 from optparse import OptionParser
-from elementtree import ElementTree as ET
+from xml.etree import ElementTree as ET
 import xml.dom.minidom as minidom
 
 
