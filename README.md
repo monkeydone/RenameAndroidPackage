@@ -17,3 +17,14 @@ Works with Python 2.7.
 Example:
 
     renamePackage.py -p ~/dev/myApp -o com.example.myapp -n com.awesome.superapp
+
+Alternate Solutions
+-----
+
+- [Rename package name with a simple shell script](http://stackoverflow.com/a/10281737/701017)  
+Great and simple, but not cover all case, you may need change something for your own project
+
+- [Renaming Android Manifest Package](http://www.piwai.info/renaming-android-manifest-package/)  
+Recommended, almost the offical solution.  
+But if you can't change all `Context.getPackageName()` to `Resources.getResourcePackageName()` for some reason 
+(eg. using third-party libraries, like me)...
