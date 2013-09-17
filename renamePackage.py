@@ -73,15 +73,17 @@ class fixXml:
                 app=i
 
     
-        b=app.attrib["{%s}name"%self.ns_android]
-        app.attrib["{%s}name"%self.ns_android]="%s.%s"%(self.old_package,b)
-        #print "test",app.tag,app.attrib["{%s}name"%self.ns_android]
+        if "{%s}name"%self.ns_android in app.attrib:
+            b=app.attrib["{%s}name"%self.ns_android]
+            app.attrib["{%s}name"%self.ns_android]="%s.%s"%(self.old_package,b)
+            #print "test",app.tag,app.attrib["{%s}name"%self.ns_android]
 
         for  i in app:
-            b=i.attrib["{%s}name"%self.ns_android]
-            if b.startswith("."):
-                x="%s%s"%(self.old_package,b)
-                i.attrib["{%s}name"%self.ns_android]=x
+            if "{%s}name"%self.ns_android in i.attrib:
+                b=i.attrib["{%s}name"%self.ns_android]
+                if b.startswith("."):
+                    x="%s%s"%(self.old_package,b)
+                    i.attrib["{%s}name"%self.ns_android]=x
             if i.tag=="provider":
                 i.attrib["{%s}authorities"%(self.ns_android)]=i.attrib["{%s}authorities"%(self.ns_android)].replace(self.old_package,self.new_package)
                 b=i.attrib["{%s}name"%self.ns_android]
