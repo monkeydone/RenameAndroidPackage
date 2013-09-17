@@ -105,7 +105,7 @@ class fixXml:
             if i.strip() != '':
                 content2+=i
                 content2+="\n"
-        f.write(content2)
+        f.write(unicode(content2,"utf-8"))
         f.close()
 def replaceString(filename,src_text,dest_text):
     print filename,src_text,dest_text
