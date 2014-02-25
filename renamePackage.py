@@ -72,21 +72,24 @@ class fixXml:
             if i.tag=="application":
                 app=i
 
-    
-        b=app.attrib["{%s}name"%self.ns_android]
-        app.attrib["{%s}name"%self.ns_android]="%s.%s"%(self.old_package,b)
-        #print "test",app.tag,app.attrib["{%s}name"%self.ns_android]
+        name_attr="{%s}name"%(self.ns_android)
+        auth_attr="{%s}authorities"%(self.ns_android)
+        if name_attr in app.attrib:
+            b=app.attrib[name_attr]
+            app.attrib[name_attr]="%s.%s"%(self.old_package,b)
+            #print "test",app.tag,app.attrib[name_attr]
 
         for  i in app:
-            b=i.attrib["{%s}name"%self.ns_android]
-            if b.startswith("."):
-                x="%s%s"%(self.old_package,b)
-                i.attrib["{%s}name"%self.ns_android]=x
+            if name_attr in i.attrib:
+                b=i.attrib[name_attr]
+                if b.startswith("."):
+                    x="%s%s"%(self.old_package,b)
+                    i.attrib[name_attr]=x
             if i.tag=="provider":
-                i.attrib["{%s}authorities"%(self.ns_android)]=i.attrib["{%s}authorities"%(self.ns_android)].replace(self.old_package,self.new_package)
-                b=i.attrib["{%s}name"%self.ns_android]
+                i.attrib[auth_attr]=i.attrib[auth_attr].replace(self.old_package,self.new_package)
+                b=i.attrib[name_attr]
                 if not b.startswith(self.old_package) or not "." in b:
-                    i.attrib["{%s}name"%self.ns_android]="%s.%s"%(self.old_package,b)
+                    i.attrib[name_attr]="%s.%s"%(self.old_package,b)
 
         
     def formatXml(self):
@@ -102,7 +105,7 @@ class fixXml:
             if i.strip() != '':
                 content2+=i
                 content2+="\n"
-        f.write(content2)
+        f.write(unicode(content2,"utf-8"))
         f.close()
 def replaceString(filename,src_text,dest_text):
     print filename,src_text,dest_text
